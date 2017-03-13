@@ -144,7 +144,7 @@ public class pDG_Builder {
     }
 
     void build_pDG() throws Error {
-        // this.build_cfg();
+        this.build_cfg();
         this.build_cdg();
         this.build_ddg();
     }
@@ -218,7 +218,7 @@ public class pDG_Builder {
                 String name = method_name(targ);
                 if (method_entries.containsKey(name)) {
                     int targ_uid = method_entries.get(name);
-                    g.addEdge(src, targ_uid, "");
+                    g.addEdge(src, targ_uid, "call-edge");
                 }
             }
         }
@@ -250,16 +250,7 @@ public class pDG_Builder {
             for (Block s : b.getSuccs()) {
                 soot.Unit head = s.getHead();
                 int uid_s = block_uids.get(s.getIndexInMethod());
-                if (tail instanceof soot.jimple.IfStmt) {
-                    soot.jimple.IfStmt t = (soot.jimple.IfStmt)tail;
-                    if (t.getTarget().equals(head)) {
-                        g.addEdge(uid_i, uid_s, "cfg:true");
-                    } else {
-                        g.addEdge(uid_i, uid_s, "cfg:false");
-                    }
-                } else {
-                    g.addEdge(uid_i, uid_s, "cfg");
-                }
+	    	g.addEdge(uid_i, uid_s, "cfg");
             }
         }
     }

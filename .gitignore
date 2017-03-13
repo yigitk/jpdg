@@ -13,3 +13,4 @@ subjects.conf
 out*
 dot_parser_tab.py
 dot_parser_tab.pyc
+env

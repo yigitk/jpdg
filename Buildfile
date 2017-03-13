@@ -2,22 +2,25 @@
 
 require 'rubygems'
 require 'buildr'
+
+## repositories.remote << 'http://mirrors.ibiblio.org/pub/mirrors/maven2/'
+repositories.remote << 'http://repo1.maven.org/'
+## repositories.remote << 'https://oss.sonatype.org/content/repositories/releases/'
+repositories.remote << 'http://central.maven.org/maven2/'
+
 require 'rake'
 Java.load
 require "antwrap"
 
-if File::exists?('parsemis/Buildfile')
-  pwd = Dir.pwd
-  Dir.chdir File::join(pwd, 'parsemis')
-  load "./Buildfile"
-  puts project('parsemis').base_dir
-  Dir.chdir pwd
-end
 
-repositories.remote << 'http://mirrors.ibiblio.org/pub/mirrors/maven2/'
-repositories.remote << 'http://repo1.maven.org/'
-repositories.remote << 'https://oss.sonatype.org/content/repositories/releases/'
-#repositories.remote << 'http://mvnrepository.com/'
+## if File::exists?('parsemis/Buildfile')
+##   pwd = Dir.pwd
+##   Dir.chdir File::join(pwd, 'parsemis')
+##   load "./Buildfile"
+##   puts project('parsemis').base_dir
+##   Dir.chdir pwd
+## end
+
 Project.local_task :run
 
 
